@@ -1,3 +1,4 @@
+import argparse
 import mlforecast
 from mlforecast.target_transforms import Differences
 from sklearn.linear_model import LinearRegression
@@ -6,6 +7,15 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser(
+        prog="forecast.py", description="Forecast power consumption program"
+    )
+    parser.add_argument(
+        "--dump", type=str, help="dump forecast picture to file", required=False
+    )
+
+    args = parser.parse_args()
+
     engine = create_engine("taos://root:taosdata@localhost:6030/power")
     conn = engine.connect()
     df = pd.read_sql(
@@ -26,4 +36,8 @@ if __name__ == "__main__":
     predicts = forecast.predict(52)
 
     pd.concat([df, predicts]).set_index("ds").plot(figsize=(12, 8))
-    plt.show()
+
+    if args.dump:
+        plt.savefig(args.dump)
+    else:
+        plt.show()
