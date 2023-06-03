@@ -1,10 +1,11 @@
 import argparse
+
+import matplotlib.pyplot as plt
 import mlforecast
+import pandas as pd
 from mlforecast.target_transforms import Differences
 from sklearn.linear_model import LinearRegression
 from sqlalchemy import create_engine, text
-import pandas as pd
-import matplotlib.pyplot as plt
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(

@@ -1,4 +1,4 @@
-name: black
+name: isort
 on:
   push:
     branches: [ main ]
@@ -18,10 +18,10 @@ jobs:
         with:
           python-version: "3.11"
 
-      - name: Install black
+      - name: Install isort
         run: |
-          python -m pip install black
+          python -m pip install isort
 
-      - name: Run black
+      - name: Run isort
         run: |
-          black --check .
+          isort --check .
