@@ -1,6 +1,7 @@
-import taos
-from random import randint
 from calendar import monthrange
+from random import randint
+
+import taos
 
 
 def create_db(conn, db_name):
