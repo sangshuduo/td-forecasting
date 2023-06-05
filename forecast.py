@@ -19,6 +19,7 @@ if __name__ == "__main__":
 
     engine = create_engine("taos://root:taosdata@localhost:6030/power")
     conn = engine.connect()
+    print("Connected to the TDengine ...")
     df = pd.read_sql(
         text("select _wstart as ds, avg(num) as y from power.meters interval(1w)"), conn
     )
@@ -26,6 +27,7 @@ if __name__ == "__main__":
 
     df.insert(0, column="unique_id", value="unique_id")
 
+    print("Forecasting ...")
     forecast = mlforecast.MLForecast(
         models=LinearRegression(),
         freq="W",
@@ -42,3 +44,4 @@ if __name__ == "__main__":
         plt.savefig(args.dump)
     else:
         plt.show()
+    print("Done")
