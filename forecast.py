@@ -1,5 +1,6 @@
 import argparse
 
+import lightgbm as lgb
 import matplotlib.pyplot as plt
 import mlforecast
 import pandas as pd
@@ -29,10 +30,10 @@ if __name__ == "__main__":
 
     print("Forecasting ...")
     forecast = mlforecast.MLForecast(
-        models=LinearRegression(),
-        freq="W",
-        lags=[52],
-        target_transforms=[Differences([52])],
+        models = [LinearRegression(), lgb.LGBMRegressor()],
+        freq = "W",
+        lags = [52],
+        target_transforms = [Differences([52])],
     )
     forecast.fit(df)
 
