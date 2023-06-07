@@ -3,3 +3,4 @@ mlforecast
 sqlalchemy
 matplotlib
 PyQt5
+lightgbm
