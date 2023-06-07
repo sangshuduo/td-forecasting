@@ -30,10 +30,10 @@ if __name__ == "__main__":
 
     print("Forecasting ...")
     forecast = mlforecast.MLForecast(
-        models = [LinearRegression(), lgb.LGBMRegressor()],
-        freq = "W",
-        lags = [52],
-        target_transforms = [Differences([52])],
+        models=[LinearRegression(), lgb.LGBMRegressor()],
+        freq="W",
+        lags=[52],
+        target_transforms=[Differences([52])],
     )
     forecast.fit(df)
 
