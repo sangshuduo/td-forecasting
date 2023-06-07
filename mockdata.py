@@ -29,7 +29,6 @@ def insert_rec_per_month(conn, db_name, table_name, year, month):
             print(f"command: {sql}")
             print(e)
             exit(1)
-    pass
 
 
 def insert_rec(conn, db_name, table_name):
