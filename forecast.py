@@ -19,8 +19,19 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     engine = create_engine("taos://root:taosdata@localhost:6030/power")
-    conn = engine.connect()
-    print("Connected to the TDengine ...")
+
+    try:
+        conn = engine.connect()
+    except Exception as e:
+        print(e)
+        exit(1)
+
+    if conn is not None:
+        print("Connected to the TDengine ...")
+    else:
+        print("Failed to connect to taos")
+        exit(1)
+
     df = pd.read_sql(
         text("select _wstart as ds, avg(num) as y from power.meters interval(1w)"), conn
     )

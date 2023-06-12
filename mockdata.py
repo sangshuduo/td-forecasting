@@ -5,15 +5,18 @@ import taos
 
 
 def create_db(conn, db_name):
+    print("Creating database ...")
     conn.execute(f"DROP DATABASE IF EXISTS {db_name}")
     conn.execute(f"CREATE DATABASE {db_name}")
 
 
 def create_table(conn, db_name, table_name):
+    print("Creating table ...")
     conn.execute(f"CREATE TABLE {db_name}.{table_name} (ts TIMESTAMP, num INT)")
 
 
 def insert_rec_per_month(conn, db_name, table_name, year, month):
+    print("Inserting data ...")
     increment = (year - 2014) * 1.1
     base = int(10 * increment)
     if month < 10 and month > 5:
@@ -38,12 +41,16 @@ def insert_rec(conn, db_name, table_name):
 
 
 if __name__ == "__main__":
-    conn = taos.connect(host="127.0.0.1")
+    try:
+        conn = taos.connect(host="127.0.0.1")
+    except Exception as e:
+        print(e)
+        exit(1)
 
     if conn is not None:
-        print("Connected to taos")
+        print("Connected to TDengine!")
     else:
-        print("Failed to connect to taos")
+        print("Failed to connect to TDengine")
         exit(1)
 
     server_ver = conn.server_info
@@ -54,3 +61,5 @@ if __name__ == "__main__":
     insert_rec(conn, "power", "meters")
 
     conn.close()
+
+    print("\nDone to mock data!")
