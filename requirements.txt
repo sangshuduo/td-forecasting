@@ -4,3 +4,5 @@ sqlalchemy
 matplotlib
 PyQt5
 lightgbm
+python-dateutil>=2.8.2
+pytz>=2020.1
