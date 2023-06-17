@@ -33,7 +33,7 @@ python forecast.py
 python forecast.py --dump forecast-result.png
 ```
 
-## Commmand line argument list
+## Command line argument list
 
 usage: forecast.py [-h] [--dump DUMP]
 
