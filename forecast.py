@@ -33,7 +33,8 @@ if __name__ == "__main__":
         exit(1)
 
     df = pd.read_sql(
-        text("select _wstart as ds, avg(num) as y from power.meters interval(1w)"), conn
+        text("select _wstart as ds, avg(num) as y from power.meters interval(1w)"),
+        conn,
     )
     conn.close()
 
@@ -50,7 +51,21 @@ if __name__ == "__main__":
 
     predicts = forecast.predict(52)
 
-    pd.concat([df, predicts]).set_index("ds").plot(figsize=(12, 8))
+    if not args.dump:
+        fig = plt.figure()
+        timer = fig.canvas.new_timer(interval=5000)
+        timer.add_callback(plt.close)
+        df.set_index("ds").plot(
+            figsize=(12, 8), title="current data, will disappear in 5 sec"
+        )
+
+        timer.start()
+        plt.show()
+        timer.stop()
+
+    pd.concat([df, predicts]).set_index("ds").plot(
+        figsize=(12, 8), title="current data with forecast"
+    )
 
     if args.dump:
         plt.savefig(args.dump)
