@@ -25,8 +25,10 @@ def insert_rec_per_month(conn, db_name, table_name, year, month):
         factor = 8
     for day in range(1, monthrange(year, month)[1] + 1):
         num = base * randint(5, factor) + randint(0, factor)
-        sql = f"INSERT INTO {db_name}.{table_name} VALUES " \
-                f"('{year}-{month}-{day} 00:00:00.000', {num})"
+        sql = (
+            f"INSERT INTO {db_name}.{table_name} VALUES "
+            f"('{year}-{month}-{day} 00:00:00.000', {num})"
+        )
         try:
             conn.execute(sql)
         except Exception as e:
