@@ -16,3 +16,10 @@ repos:
     rev: v1.13.6
     hooks:
       - id: typos-src
+
+
+  - repo: https://github.com/pycqa/isort
+    rev: 5.12.0
+    hooks:
+      - id: isort
+        name: isort (python)
