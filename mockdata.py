@@ -33,13 +33,16 @@ def insert_rec_per_month(conn, db_name: str, device_seq: int, year: int, month: 
     increment = (year - 2014) * 1.1
     base = int(10 * increment)
     if month < 10 and month > 5:
-        factor = 10
+        factor = 9
     else:
         factor = 8
     for day in range(1, monthrange(year, month)[1] + 1):
-        temperature = int(3 * randint(8, factor) * temp_inc)
+        temperature = int(
+            randint(0, (month if month < 10 else month - 9))
+            + 3 * randint(8, factor) * temp_inc
+        )
 
-        extra_num = (temperature - 26) if temperature > 26 else 0
+        extra_num = (temperature - 30) if temperature > 30 else 0
         num = base * randint(5, factor) + randint(0, factor) + extra_num
         sql = (
             f"INSERT INTO {db_name}.dev_{device_seq} VALUES "
