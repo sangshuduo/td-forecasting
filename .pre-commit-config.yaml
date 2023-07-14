@@ -27,3 +27,4 @@ repos:
     hooks:
       - id: nbqa-black
         additional_dependencies: [jupytext]  # optional, only if you're using Jupytext
+        args: ["--nbqa-shell"]

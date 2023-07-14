@@ -18,7 +18,7 @@ python -m pip install -r requirements.txt
 ### Mock data
 
 ```
-python mockdata.py
+python mockdata.py [--devices NUM_OF_DEVICES]
 ```
 
 ### Forecasting and show the result
