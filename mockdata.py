@@ -7,40 +7,58 @@ import taos
 
 def create_db(conn, db_name: str):
     print("Creating database ...")
-    conn.execute(f"DROP DATABASE IF EXISTS {db_name}")
-    conn.execute(f"CREATE DATABASE {db_name}")
+    try:
+        conn.execute(f"DROP DATABASE IF EXISTS {db_name}")
+        conn.execute(f"CREATE DATABASE {db_name}")
+    except Exception as e:
+        print(e)
+        exit(1)
 
 
 def create_stable(conn, db_name: str, stable_name: str):
     print("Creating stable ...")
-    conn.execute(
-        f"CREATE STABLE {db_name}.{stable_name} (ts TIMESTAMP, num INT, temperature FLOAT) TAGS(device nchar(20))"
-    )
+    try:
+        conn.execute(
+            f"CREATE STABLE {db_name}.{stable_name} (ts TIMESTAMP, num INT, temperature FLOAT) TAGS(device nchar(20))"
+        )
+    except Exception as e:
+        print(e)
+        exit(1)
 
 
 def create_table(conn, db_name: str, stable_name: str, total: int):
     print("Creating table ...")
     for i in range(total):
         group_id = i % 10
-        conn.execute(
-            f"CREATE TABLE {db_name}.dev_{i} USING {db_name}.{stable_name} TAGS('dev_{group_id}')"
-        )
+        try:
+            conn.execute(
+                f"CREATE TABLE {db_name}.dev_{i} USING {db_name}.{stable_name} TAGS('dev_{group_id}')"
+            )
+        except Exception as e:
+            print(e)
+            exit(1)
 
 
 def insert_rec_per_month(conn, db_name: str, device_seq: int, year: int, month: int):
     print(f"Inserting data for {year}-{month} to dev_{device_seq} ...")
-    temp_inc = 1.01 ** (year - 2014)  # world become warmer year by year
-    increment = (year - 2014) * 1.1
-    base = int(10 * increment)
-    if month < 10 and month > 5:
-        factor = 10
-    else:
-        factor = 8
+    inc_yoy = 1.05 ** (year - 2014)  # world become warmer year by year
+    increment = int(
+        ((year - 2014) * 12 + month - 1) * inc_yoy
+    )  # connect to power consumption increase month by month
     for day in range(1, monthrange(year, month)[1] + 1):
-        temperature = int(3 * randint(8, factor) * temp_inc)
+        if month > 2 and month < 9:
+            # temperature increase from Mar to Sep
+            temperature = inc_yoy * randint(0 + month * 3, 10 + month * 3)
+        else:
+            # temperature decrease from Sep to Feb
+            base_month = month + 12 if month < 3 else month
+            temperature = inc_yoy * randint(
+                0 + (17 - base_month) * 3, 10 + (17 - base_month) * 3
+            )
 
-        extra_num = (temperature - 26) if temperature > 26 else 0
-        num = base * randint(5, factor) + randint(0, factor) + extra_num
+        # for aircondition consume
+        extra_num = int(3 * (temperature - 25) if temperature > 25 else 0)
+        num = increment * randint(5, 10) + randint(0, 10) + extra_num
         sql = (
             f"INSERT INTO {db_name}.dev_{device_seq} VALUES "
             f"('{year}-{month}-{day} 00:00:00.000', {num}, {temperature})"
