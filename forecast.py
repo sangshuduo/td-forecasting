@@ -34,7 +34,7 @@ if __name__ == "__main__":
 
     df = pd.read_sql(
         text(
-            "select _wstart as ds, avg(num) as y, avg(temperature) as temperature from power.meters interval(1w)"
+            "select _wstart as ds, avg(num) as y, avg(temperature) as temperature, avg(goods) as goods from power.meters interval(1w)"
         ),
         conn,
     )

@@ -57,7 +57,10 @@ def insert_rec_per_month(conn, db_name: str, device_seq: int, year: int, month: 
             )
 
         # for aircondition consume
-        goods = randint(0, 10)
+        if day < 15:
+            goods = randint(0, int(increment))
+        else:
+            goods = randint(int(increment * 0.5), int(1.5 * increment))
         extra_num = int(3 * (temperature - 25) if temperature > 25 else 0)
         num = increment * randint(5, 10) + goods + extra_num
         sql = (
