@@ -19,7 +19,7 @@ def create_stable(conn, db_name: str, stable_name: str):
     print("Creating stable ...")
     try:
         conn.execute(
-            f"CREATE STABLE {db_name}.{stable_name} (ts TIMESTAMP, num INT, temperature FLOAT) TAGS(device nchar(20))"
+            f"CREATE STABLE {db_name}.{stable_name} (ts TIMESTAMP, num INT, temperature FLOAT, goods INT) TAGS(device nchar(20))"
         )
     except Exception as e:
         print(e)
@@ -57,11 +57,12 @@ def insert_rec_per_month(conn, db_name: str, device_seq: int, year: int, month: 
             )
 
         # for aircondition consume
+        goods = randint(0, 10)
         extra_num = int(3 * (temperature - 25) if temperature > 25 else 0)
-        num = increment * randint(5, 10) + randint(0, 10) + extra_num
+        num = increment * randint(5, 10) + goods + extra_num
         sql = (
             f"INSERT INTO {db_name}.dev_{device_seq} VALUES "
-            f"('{year}-{month}-{day} 00:00:00.000', {num}, {temperature})"
+            f"('{year}-{month}-{day} 00:00:00.000', {num}, {temperature}, {goods})"
         )
         try:
             conn.execute(sql)
