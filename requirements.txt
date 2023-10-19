@@ -4,6 +4,7 @@ sqlalchemy
 matplotlib
 PyQt5
 lightgbm
+plotext
 python-dateutil>=2.8.2
 pytz>=2020.1
 nbqa[toolchain]
