@@ -27,6 +27,12 @@ python mockdata.py [--devices NUM_OF_DEVICES]
 python forecast.py
 ```
 
+### [WIP] Forecasting and show the result on console
+
+```
+python forecast.py --plotext
+```
+
 ### Forecasting and dump to file
 
 ```
@@ -35,10 +41,11 @@ python forecast.py --dump forecast-result.png
 
 ## Command line argument list
 
-usage: forecast.py [-h] [--dump DUMP]
+usage: forecast.py [-h] [--dump DUMP] [--plotext]
 
 Forecast power consumption program
 
 options:
   -h, --help   show this help message and exit
   --dump DUMP  dump forecast picture to file
+  --plotext    plot forecast picture in console mode
