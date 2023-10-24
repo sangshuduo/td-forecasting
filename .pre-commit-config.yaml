@@ -33,3 +33,9 @@ repos:
     rev: 'v2.10'  # or any later Vulture version
     hooks:
       - id: vulture
+
+  - repo: https://github.com/pycqa/pydocstyle
+    rev: 6.1.1
+    hooks:
+      - id: pydocstyle
+        additional_dependencies: [toml]
