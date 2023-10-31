@@ -39,3 +39,9 @@ repos:
     hooks:
       - id: pydocstyle
         additional_dependencies: [toml]
+  - repo: https://github.com/PyCQA/bandit
+    rev: '1.7.5' # Update me!
+    hooks:
+      - id: bandit
+        args: ["-c", "pyproject.toml"]
+        additional_dependencies: ["bandit[toml]"]
