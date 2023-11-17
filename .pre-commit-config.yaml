@@ -34,11 +34,6 @@ repos:
     hooks:
       - id: vulture
 
-  - repo: https://github.com/pycqa/pydocstyle
-    rev: 6.1.1
-    hooks:
-      - id: pydocstyle
-        additional_dependencies: [toml]
   - repo: https://github.com/PyCQA/bandit
     rev: '1.7.5' # Update me!
     hooks:
