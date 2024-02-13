@@ -1,5 +1,6 @@
 import argparse
 
+import gif
 import lightgbm as lgb
 import matplotlib.pyplot as plt
 import mlforecast
@@ -15,6 +16,9 @@ if __name__ == "__main__":
     )
     parser.add_argument(
         "--dump", type=str, help="dump forecast picture to file", required=False
+    )
+    parser.add_argument(
+        "--gif", type=str, help="dump forecast picture to gif file", required=False
     )
 
     parser.add_argument(
@@ -82,6 +86,10 @@ if __name__ == "__main__":
 
     if args.dump:
         plt.savefig(args.dump)
+    elif args.gif:
+        # TODO: add gif support
+        gif.options.matplotlib["dpi"] = 300
+        gif.save(frames, "output.gif", duration=50)
     elif args.plotext:
         plotext.show()
     else:
