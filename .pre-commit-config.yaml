@@ -11,7 +11,7 @@ repos:
       - id: black
 
   - repo: https://github.com/crate-ci/typos
-    rev: v1.18.2
+    rev: typos-v0.10.21
     hooks:
       - id: typos
 
