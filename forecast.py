@@ -89,7 +89,7 @@ if __name__ == "__main__":
     elif args.gif:
         # TODO: add gif support
         gif.options.matplotlib["dpi"] = 300
-        gif.save(frames, "output.gif", duration=50)
+        # gif.save(frames, "output.gif", duration=50)
     elif args.plotext:
         plotext.show()
     else:
