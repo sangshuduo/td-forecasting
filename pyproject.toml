@@ -1,2 +1,4 @@
 [tool.vulture]
 paths = ["mockdata.py", "forecast.py"]
+[tool.typos.default.extend-words]
+"yoy" = "yoy"
