@@ -2,3 +2,6 @@
 paths = ["mockdata.py", "forecast.py"]
 [tool.typos.default.extend-words]
 "yoy" = "yoy"
+[tool.bandit]
+targets = ["mockdata.py", "forecast.py"]
+skips = ["B311", "B608"]

@@ -75,7 +75,7 @@ def insert_rec_per_month(conn, db_name: str, device_seq: int, year: int, month: 
             exit(1)
 
 
-def insert_rec(conn, db_name: str, device_seq: str):
+def insert_rec(conn, db_name: str, device_seq: int):
     for year in range(2015, 2023):
         for month in range(1, 13):
             insert_rec_per_month(conn, db_name, device_seq, year, month)
