@@ -7,6 +7,7 @@ import mlforecast
 import pandas as pd
 import plotext
 from mlforecast.target_transforms import Differences
+from pandas import DataFrame
 from sklearn.linear_model import LinearRegression
 from sqlalchemy import create_engine, text
 
@@ -55,7 +56,7 @@ if __name__ == "__main__":
 
     print("Forecasting ...")
     forecast = mlforecast.MLForecast(
-        models=[LinearRegression(), lgb.LGBMRegressor()],
+        models=[LinearRegression(), lgb.LGBMRegressor()],  # type: ignore
         freq="W",
         lags=[52],
         target_transforms=[Differences([52])],
@@ -80,7 +81,7 @@ if __name__ == "__main__":
             plt.show()
             timer.stop()
 
-    pd.concat([df, predicts]).set_index("ds").plot(
+    pd.concat([df, DataFrame(predicts)]).set_index("ds").plot(
         figsize=(12, 8), title="current data with forecast"
     )
 

@@ -5,3 +5,7 @@ paths = ["mockdata.py", "forecast.py"]
 [tool.bandit]
 targets = ["mockdata.py", "forecast.py"]
 skips = ["B311", "B608"]
+[tool.pyright]
+# ...
+venvPath = "."
+venv = ".venv"
