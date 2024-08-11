@@ -60,7 +60,7 @@ repos:
       - id: ruff-format
 
   - repo: https://github.com/RobertCraigie/pyright-python
-    rev: v1.1.374
+    rev: v1.1.375
     hooks:
     - id: pyright
       additional_dependencies: ["gif", "lightgbm", "pandas", "scikit-learn", "scipy", "mlforecast", "plotext", "sqlalchemy", "taospy"]
