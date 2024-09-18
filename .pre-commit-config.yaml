@@ -64,3 +64,8 @@ repos:
     hooks:
     - id: pyright
       additional_dependencies: ["gif", "lightgbm", "pandas", "scikit-learn", "scipy", "mlforecast", "plotext", "sqlalchemy", "taospy"]
+
+  - repo: https://github.com/asottile/pyupgrade
+    rev: v3.17.0
+    hooks:
+    - id: pyupgrade
