@@ -18,7 +18,7 @@ repos:
         name: isort (python)
 
   - repo: https://github.com/nbQA-dev/nbQA
-    rev: 1.8.7
+    rev: 1.9.1
     hooks:
       - id: nbqa-black
         additional_dependencies: [jupytext]  # optional, only if you're using Jupytext
