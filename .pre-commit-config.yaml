@@ -30,7 +30,7 @@ repos:
       - id: vulture
 
   - repo: https://github.com/PyCQA/bandit
-    rev: '1.7.10' # Update me!
+    rev: '1.8.0' # Update me!
     hooks:
       - id: bandit
         args: ["-c", "pyproject.toml"]
